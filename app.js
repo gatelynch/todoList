@@ -32,10 +32,10 @@ function addTodos(){
 function render(){
   todoList.innerHTML = '';
   todoArray.forEach((item,i)=>{
+    
     const li = document.createElement('li');
     li.className = 'collection-item';
-    li.innerHTML = `<label>${item.title}</label></div><i class="delete-item secondary-content fa fa-remove" data-id="${i}"></i>`
-    
+    li.innerHTML = `<label>${item.title}</label><i class="delete-item secondary-content fa fa-remove" data-id="${i}"></i>`;
     todoList.appendChild(li);
   })
 }
@@ -45,6 +45,11 @@ function clearAll(){
 }
 function deleteTodo(e){
   let target = e.target.dataset.id;
-  todoArray.splice(target,1);
-  render();
+  if (e.target.nodeName !== 'I') {
+    return
+  } else{
+    todoArray.splice(target,1);
+    render();
+  }
+  
 }
